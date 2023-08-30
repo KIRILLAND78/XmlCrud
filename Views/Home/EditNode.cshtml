@@ -1,0 +1,42 @@
+@model WebApplication2.Models.RequestModel
+@{
+    List<string> attributes = new List<string>() 
+    {
+        "Server",
+        "DataBase",
+        "UserName",
+        "UserPassword",
+        "DataSourceType",
+        "FileQueryColName",
+        "FileQueryOutputColName",
+        "FileQueryTempPath",
+        "UsePivotData",
+        "PivotCol",
+        "PivotCols",
+        "PivotRows",
+        "PivotData",
+        "DefaultComplex",
+    };
+}
+
+<div>
+    <form method="post">
+        @foreach (var attr in attributes)
+        {
+            var prop = Model.GetType().GetProperty(attr);
+            var value = prop.GetValue(Model);
+            if (value != null)
+            {
+                <div class="d-flex justify-content-between align-items-center row-cols-auto container-md border border-dark bo">
+                    <div>
+                        <p>@attr</p>
+                    </div>
+                    <div>
+                        <input type="text" name="@attr" value="@value" /> 
+                    </div>
+                </div>
+            }
+        }
+        <button type="submit">Edit</button>
+    </form>
+</div>

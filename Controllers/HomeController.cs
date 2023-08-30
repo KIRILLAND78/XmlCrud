@@ -60,6 +60,7 @@ public class HomeController : Controller
     [Route("/Home/DeleteNode/{ReportId:int}")]
     public async Task<IActionResult> DeleteNode([FromRoute] int ReportId, RequestModel requestModel)
     {
+        
         var XPATH = "/Reports/Data";
         var document = getXML();
         foreach (XmlNode node in document.SelectNodes(XPATH))

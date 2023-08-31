@@ -60,7 +60,7 @@ public class HomeController : Controller
     [Route("/Home/DeleteNode/{ReportId:int}")]
     public async Task<IActionResult> DeleteNode([FromRoute] int ReportId, RequestModel requestModel)
     {
-        
+        var docume = "privet kak dela";
         var XPATH = "/Reports/Data";
         var document = getXML();
         foreach (XmlNode node in document.SelectNodes(XPATH))
@@ -75,6 +75,7 @@ public class HomeController : Controller
         }
         return NoContent();
     }
+
 
     [Route("Home/EditNode/{ReportId:int}")]
     public IActionResult EditNode([FromRoute] int ReportId)
@@ -110,8 +111,9 @@ public class HomeController : Controller
 
         return View();
     }
-
-    /*[HttpPost]
+    
+    [Route("Home/EditNode/{ReportId:int}")]
+    [HttpPost]
     public IActionResult EditNode(RequestModel updatedModel)
     {
         if (ModelState.IsValid)
@@ -122,13 +124,15 @@ public class HomeController : Controller
             {
                 if (updatedModel.ReportId == int.Parse(node["ReportId"].InnerText))
                 {
-                    XmlNode parent = node.ParentNode;
+                    node["Server"].InnerText = updatedModel.Server;
                     document.Save(string.Concat(this.Environment.ContentRootPath, "/Services", "/RQList.xml"));
                 }
             }
 
         }
-    }*/
+
+        return View(updatedModel);
+    }
     
     
     

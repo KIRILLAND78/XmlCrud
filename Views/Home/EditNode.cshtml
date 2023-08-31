@@ -20,7 +20,7 @@
 }
 
 <div>
-    <form method="post">
+    <form method="post" asp-controller="Home" asp-action="EditNode">
         @foreach (var attr in attributes)
         {
             var prop = Model.GetType().GetProperty(attr);
@@ -32,7 +32,7 @@
                         <p>@attr</p>
                     </div>
                     <div>
-                        <input type="text" name="@attr" value="@value" /> 
+                        <input type="text" name="@attr" asp-for="@attr" value="@value" /> 
                     </div>
                 </div>
             }

@@ -1,17 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <Reports>
   <Data>
-    <ReportId>417</ReportId>
-    <Server>ksdb3\dwh14</Server>
-    <DataBase>dwh2_eis</DataBase>
-    <UserName>kondratieva</UserName>
-    <UserPassword>1</UserPassword>
-    <UsePivotData>true</UsePivotData>
-    <PivotCol>product_group</PivotCol>
-    <PivotRows>partner</PivotRows>
-    <PivotData>year2020,year2021,year2022</PivotData>
-  </Data>
-  <Data>
     <ReportId>0</ReportId>
     <Server>ksdb3\dwh_de</Server>
     <DataBase>dwh2_test_marina_19</DataBase>

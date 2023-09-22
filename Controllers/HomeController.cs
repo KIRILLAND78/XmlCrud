@@ -1,8 +1,14 @@
 ﻿using System.Diagnostics;
+using System.Dynamic;
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using WebApplication2.Models;
+using WebApplication2.Models.Constants;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace WebApplication2.Controllers;
 
@@ -18,50 +24,38 @@ public class HomeController : Controller
     }
     public XmlDocument getXML()
     {
-        var XML = "/RQList.xml";
-        var PATH = "/Services";
+        var XML = Constants.XML;
+        var PATH = Constants.PATH;
         XmlDocument document = new XmlDocument();
         document.Load(string.Concat(this.Environment.ContentRootPath, PATH, XML));
-        return document;
+        return document; 
     }
     
-    [Route("Reports")]
+    [HttpGet("api/Reports")]
     public IActionResult Reports()
     {
-        List<RequestModel> requests = new List<RequestModel>();
-        var XPATH = "/Reports/Data";
-        var document = getXML();
+        string xmlFilePath = this.Environment.ContentRootPath + Constants.PATH + Constants.XML;
+        string xmlData = System.IO.File.ReadAllText(xmlFilePath);
         
-        foreach (XmlNode node in document.SelectNodes(XPATH))
+        XmlSerializer serializer = new XmlSerializer(typeof(Reports));
+        
+        using (StringReader reader = new StringReader(xmlData))
         {
-            requests.Add(new RequestModel
-            {
-                ReportId = int.Parse(node["ReportId"]?.InnerText),
-                Server = node["Server"]?.InnerText,
-                DataBase = node["DataBase"]?.InnerText,
-                UserName = node["UserName"]?.InnerText,
-                UserPassword = node["UserPassword"]?.InnerText,
-                DataSourceType = int.TryParse(node["DataSourceType"]?.InnerText, out int DataSourceType) ? DataSourceType : null,
-                FileQueryColName = node["FileQueryColName"]?.InnerText,
-                FileQueryOutputColName = node["FileQueryOutputColName"]?.InnerText,
-                FileQueryTempPath = node["FileQueryTempPath"]?.InnerText,
-                UsePivotData = bool.TryParse(node["UsePivotData"]?.InnerText, out bool usePivotData) ? usePivotData : null,
-                PivotCol = node["PivotCol"]?.InnerText,
-                PivotCols = node["PivotCols"]?.InnerText,
-                PivotRows = node["PivotRows"]?.InnerText,
-                PivotData = node["PivotData"]?.InnerText,
-                DefaultComplex = node["DefaultComplex"]?.InnerText,
-            });
+            Reports reports = (Reports)serializer.Deserialize(reader);
+
+            // Преобразуйте объекты в JSON
+            string jsonData = JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented);
+
+            // Теперь у вас есть JSON данные, которые вы можете передать
+            return Ok(jsonData);
         }
-        return View(requests);
     }
 
 
     [Route("/Home/DeleteNode/{ReportId:int}")]
     public async Task<IActionResult> DeleteNode([FromRoute] int ReportId, RequestModel requestModel)
     {
-        var docume = "privet kak dela";
-        var XPATH = "/Reports/Data";
+        var XPATH = Constants.XPATH;
         var document = getXML();
         foreach (XmlNode node in document.SelectNodes(XPATH))
         {
@@ -80,7 +74,7 @@ public class HomeController : Controller
     [Route("Home/EditNode/{ReportId:int}")]
     public IActionResult EditNode([FromRoute] int ReportId)
     {
-        var XPATH = "/Reports/Data";
+        var XPATH = Constants.XPATH;
         var document = getXML();
         
         foreach (XmlNode node in document.SelectNodes(XPATH))
@@ -118,7 +112,7 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-            var XPATH = "/Reports/Data";
+            var XPATH = Constants.XPATH;
             var document = getXML();
             foreach (XmlNode node in document.SelectNodes(XPATH))
             {
@@ -130,15 +124,8 @@ public class HomeController : Controller
             }
 
         }
-
         return View(updatedModel);
     }
-    
-    
-    
-    
-    
-    
     
     
     public IActionResult Index()
@@ -155,6 +142,5 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    
     
 }

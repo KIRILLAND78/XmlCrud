@@ -1,5 +1,14 @@
+using System.Xml.Serialization;
+
 namespace WebApplication2.Models;
 
+
+[XmlRoot("Reports")]
+public class Reports
+{
+    [XmlElement("Data")]
+    public List<RequestModel> DataList { get; set; }
+}
 public class RequestModel
 {
     public int ReportId { get; set; }

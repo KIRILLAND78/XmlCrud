@@ -1,53 +1,11 @@
-@model IEnumerable<WebApplication2.Models.RequestModel>
 
 @{
     ViewData["Title"] = "Request Table";
-    // Тут лежат все аттрибуты, чтобы избавиться от дубликата кода,
-    // не делать бесконечно много if ( item.ReportId != null) <p> @ReportId - @item.ReportId и так далее
-    List<string> attributes = new List<string>() 
-    {
-        "ReportId", 
-        "Server",
-        "DataBase",
-        "UserName",
-        "UserPassword",
-        "DataSourceType",
-        "FileQueryColName",
-        "FileQueryOutputColName",
-        "FileQueryTempPath",
-        "UsePivotData",
-        "PivotCol",
-        "PivotCols",
-        "PivotRows",
-        "PivotData",
-        "DefaultComplex",
-    };
 }
 
 <div class="text-center container-md text-sm-start">
     <div class="rounded-3 bg-light pb-4">
-        @foreach (var item in Model)
-        {
-            @foreach (var attr in attributes)
-            {
-                // так как мы не можем просто воткнуть item.attr мы получаем значение через GetValue и в конечном итоге 
-                // получается конструкция item.attr, где вместо attr лежат поля, которые могут встретиться, а на выходе мы получаем значение
-                var prop = item.GetType().GetProperty(attr);
-                var value = prop.GetValue(item); 
-                @if (value != null) 
-                {
-                    <div class="d-flex justify-content-between align-items-center row-cols-auto container-md border border-dark bo">
-                        <div>
-                            <p>@attr - @value</p>
-                        </div>
-                    </div>
-                }
-            }
-            <div>
-                @Html.ActionLink("Edit", "EditNode", new { id = item.ReportId })
-                @Html.ActionLink("Delete", "DeleteNode", new { id = item.ReportId })
-            </div>  
-        }
+        Privet kak dela
     </div>
     
 </div>

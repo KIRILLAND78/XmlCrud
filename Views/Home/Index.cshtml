@@ -3,6 +3,54 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <script>
+        Ext.application({
+            name: 'MyApp',
+            launch: function () {
+                // Определение модели данных
+                Ext.define('Report', {
+                    extend: 'Ext.data.Model',
+                    fields: [
+                        'ReportId', 'Server', 'DataBase', 'UserName', 'UserPassword', 'DataSourceType',
+                        'FileQueryColName', 'FileQueryOutputColName', 'FileQueryTempPath'
+                    ]
+                });
+        
+                // Создание хранилища данных с использованием Ajax proxy
+                var store = Ext.create('Ext.data.Store', {
+                    model: 'Report',
+                    proxy: {
+                        type: 'ajax',
+                        url: 'https://localhost:7004/api/Reports', // Укажите ваш адрес API
+                        reader: {
+                            type: 'json',
+                            rootProperty: 'Reports.Data'
+                        }
+                    },
+                    autoLoad: true // Автоматически загружать данные после создания хранилища
+                });
+        
+                // Создание GRID
+                var grid = Ext.create('Ext.grid.Panel', {
+                    title: 'Reports',
+                    store: store,
+                    columns: [
+                        { text: 'ReportId', dataIndex: 'ReportId' },
+                        { text: 'Server', dataIndex: 'Server' },
+                        { text: 'DataBase', dataIndex: 'DataBase' },
+                        { text: 'UserName', dataIndex: 'UserName' },
+                        { text: 'UserPassword', dataIndex: 'UserPassword' },
+                        { text: 'DataSourceType', dataIndex: 'DataSourceType' },
+                        { text: 'FileQueryColName', dataIndex: 'FileQueryColName' },
+                        { text: 'FileQueryOutputColName', dataIndex: 'FileQueryOutputColName' },
+                        { text: 'FileQueryTempPath', dataIndex: 'FileQueryTempPath' }
+                    ],
+                    height: 300,
+                    width: 600,
+                    renderTo: Ext.getBody()
+                });
+            }
+        });
+
+    </script>
 </div>

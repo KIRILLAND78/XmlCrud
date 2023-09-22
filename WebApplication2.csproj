@@ -10,4 +10,21 @@
       <Folder Include="Services\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="WebApplication1\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="WebApplication1\appsettings.json" />
+      <_ContentIncludedByDefault Remove="WebApplication1\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="WebApplication1\Properties\launchSettings.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\appsettings.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\obj\WebXMLApi.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="WebXMLApi\Properties\launchSettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
 </Project>

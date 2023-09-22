@@ -1,16 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <Reports>
   <Data>
-    <ReportId>0</ReportId>
-    <Server>ksdb3\dwh_de</Server>
-    <DataBase>dwh2_test_marina_19</DataBase>
-    <UserName>fest</UserName>
-    <UserPassword>
-    </UserPassword>
-    <DataSourceType>0</DataSourceType>
-    <DefaultComplex>64</DefaultComplex>
-  </Data>
-  <Data>
     <ReportId>4497</ReportId>
     <FileQueryColName>image_описание</FileQueryColName>
     <FileQueryOutputColName>filePath</FileQueryOutputColName>

@@ -21,10 +21,10 @@
                     model: 'Report',
                     proxy: {
                         type: 'ajax',
-                        url: 'https://localhost:7004/api/Reports', // Укажите ваш адрес API
+                        url: 'https://localhost:7004/xml/api/Reports', // Укажите ваш адрес API
                         reader: {
                             type: 'json',
-                            rootProperty: 'Reports.Data'
+                            rootProperty: 'DataList'
                         }
                     },
                     autoLoad: true // Автоматически загружать данные после создания хранилища

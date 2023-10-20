@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "k+DBPQl5x0js+PhBk7EVr385KXsADLDT1EpZe3FLEKVILF/6SAlOzgtbzMnPA4N4maANT/M2+GzxXP7CFQlGFg==",
+  "dgSpecHash": "8ftXhL5ZePUmbwX2MHW2UKZge6RtNjPW/eutZBItaW0PzLxF/yvJPkdj+M31nLynL2jIXwdraRP7KPXtJGR3NA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\XmlCrud\\WebApplication2.csproj",
+  "projectFilePath": "C:\\Users\\Пользователь\\Desktop\\.net\\CsharpProjects\\XmlCrud\\WebApplication2.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Пользователь\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -20,7 +20,7 @@
 }
 
 <div>
-    <form method="post" asp-controller="Home" asp-action="EditNode">
+    <form method="post" asp-controller="Home">
         @foreach (var attr in attributes)
         {
             var prop = Model.GetType().GetProperty(attr);

@@ -1,18 +1,34 @@
 <?xml version="1.0" standalone="yes"?>
 <Reports>
   <Data>
-    <ReportId>4497</ReportId>
-    <FileQueryColName>image_описание</FileQueryColName>
+    <ReportId>2357</ReportId>
+    <FileQueryColName>окс_изображение_описание</FileQueryColName>
     <FileQueryOutputColName>filePath</FileQueryOutputColName>
     <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
-    <Server>ksdb3\dwh12</Server>
-    <DataBase>dwh2_gmp_project21</DataBase>
   </Data>
   <Data>
-    <ReportId>453</ReportId>
+    <ReportId>2357</ReportId>
+    <FileQueryColName>окс_изображение_описание</FileQueryColName>
+    <FileQueryOutputColName>filePath</FileQueryOutputColName>
+    <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
+  </Data>
+  <Data>
+    <ReportId>250</ReportId>
+    <Server>ksdb3\dwh10r2</Server>
+    <DataBase>dwh2_eis_test</DataBase>
+    <UserName>fest</UserName>
+    <UserPassword>1</UserPassword>
+    <DataSourceType>0</DataSourceType>
+  </Data>
+  <Data>
+    <ReportId>417</ReportId>
+    <Server>ksdb3\dwh14</Server>
+    <DataBase>dwh2_eis</DataBase>
+    <UserName>kondratieva</UserName>
+    <UserPassword>1</UserPassword>
     <UsePivotData>true</UsePivotData>
-    <PivotCols>product_group,product_subgroup</PivotCols>
-    <PivotRows>region</PivotRows>
-    <PivotData>year2021</PivotData>
+    <PivotCol>product_group</PivotCol>
+    <PivotRows>partner</PivotRows>
+    <PivotData>year2020,year2021,year2022</PivotData>
   </Data>
 </Reports>

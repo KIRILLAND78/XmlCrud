@@ -6,8 +6,7 @@
     <script>
         Ext.application({
             name: 'MyApp',
-            launch: function () {
-                // Определение модели данных
+            launch: function () {  
                 Ext.define('Report', {
                     extend: 'Ext.data.Model',
                     fields: [
@@ -16,21 +15,24 @@
                     ]
                 });
         
-                // Создание хранилища данных с использованием Ajax proxy
+                
                 var store = Ext.create('Ext.data.Store', {
                     model: 'Report',
                     proxy: {
-                        type: 'ajax',
-                        url: 'https://localhost:7004/xml/api/Reports', // Укажите ваш адрес API
+                        type: 'rest',
+                        url: 'https://localhost:7004/xml/api/Reports', 
                         reader: {
                             type: 'json',
                             rootProperty: 'DataList'
+                        },
+                        wrter: {
+                            type: 'json'
                         }
                     },
-                    autoLoad: true // Автоматически загружать данные после создания хранилища
+                    autoLoad: true 
                 });
         
-                // Создание GRID
+                
                 var grid = Ext.create('Ext.grid.Panel', {
                     title: 'Reports',
                     store: store,
@@ -45,12 +47,31 @@
                         { text: 'FileQueryOutputColName', dataIndex: 'FileQueryOutputColName' },
                         { text: 'FileQueryTempPath', dataIndex: 'FileQueryTempPath' }
                     ],
-                    height: 300,
-                    width: 600,
+                    listeners: {
+                        rowClick: function (grid, record){
+                            var reportId = record.get('ReportId');
+                                                        
+                            Ext.Ajax.request({
+                                url: 'https://localhost:7004/xml/DeleteNode/' + reportId,
+                                method: 'DELETE',
+                                success: function (response, opts) {
+                                    alert("Запись с reportId" + reportId + " удалена")
+                                },
+                                failure: function (response, opts) {
+                                    alert("Записи не существует или произошла ошибка, но скорее всего произошла ошибка")
+                                }
+                            });
+                        }
+                    },
+                    flex: 1, 
+                    height: 1500,
+                    width: '800',
                     renderTo: Ext.getBody()
                 });
+                
             }
+            
         });
-
+        
     </script>
 </div>

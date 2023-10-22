@@ -1,8 +1,10 @@
-﻿using System.Xml.Serialization;
+﻿using System.Xml;
+using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebApplication2.Models;
 using WebApplication2.Models.Constants;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace WebApplication2.Controllers;
 [Route("xml")]
@@ -37,23 +39,28 @@ public class XmlController : Controller
     }
 
 
-    // [Route("DeleteNode/{ReportId:int}")]
-    // public async Task<IActionResult> DeleteNode([FromRoute] int ReportId, RequestModel requestModel)
-    // {
-    //     var XPATH = Constants.XPATH;
-    //     var document = getXML();
-    //     foreach (XmlNode node in document.SelectNodes(XPATH))
-    //     {
-    //         if (ReportId == int.Parse(node["ReportId"].InnerText))
-    //         {
-    //             XmlNode parent = node.ParentNode;
-    //             parent.RemoveChild(node);
-    //             document.Save(string.Concat(this.Environment.ContentRootPath, "/Services", "/RQList.xml"));
-    //             break;
-    //         }
-    //     }
-    //     return NoContent();
-    // }
+    [Route("DeleteNode/{ReportId:int}")]
+    public async Task<IActionResult> DeleteNode([FromRoute] int ReportId, RequestModel requestModel)
+    {
+        var XML = Constants.XML;
+        var PATH = Constants.PATH;
+        XmlDocument document = new XmlDocument();
+        document.Load(string.Concat(this.Environment.ContentRootPath, PATH, XML));
+        var XPATH = Constants.XPATH;
+        
+        foreach (XmlNode node in document.SelectNodes(XPATH))
+        {
+            if (ReportId == int.Parse(node["ReportId"].InnerText))
+            {
+                XmlNode parent = node.ParentNode;
+                parent.RemoveChild(node);
+                document.Save(string.Concat(this.Environment.ContentRootPath, "/Services", "/RQList.xml"));
+                return Ok();
+                
+            }
+        }
+        return NoContent();
+    }
     //
     //
     // [Route("EditNode/{ReportId:int}")]

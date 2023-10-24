@@ -11,11 +11,12 @@
                     extend: 'Ext.data.Model',
                     fields: [
                         'ReportId', 'Server', 'DataBase', 'UserName', 'UserPassword', 'DataSourceType',
-                        'FileQueryColName', 'FileQueryOutputColName', 'FileQueryTempPath'
+                        'FileQueryColName', 'FileQueryOutputColName', 'FileQueryTempPath',
+                        'DefaultComplex', 'PivotCol', 'PivotCols', 'PivotData', 'PivotRows',
+                        'UsePivotData'
                     ]
                 });
-        
-                
+    
                 var store = Ext.create('Ext.data.Store', {
                     model: 'Report',
                     proxy: {
@@ -34,38 +35,101 @@
         
                 
                 var grid = Ext.create('Ext.grid.Panel', {
+                    
+                    
                     title: 'Reports',
                     store: store,
+                    
+
                     columns: [
-                        { text: 'ReportId', dataIndex: 'ReportId' },
-                        { text: 'Server', dataIndex: 'Server' },
-                        { text: 'DataBase', dataIndex: 'DataBase' },
-                        { text: 'UserName', dataIndex: 'UserName' },
-                        { text: 'UserPassword', dataIndex: 'UserPassword' },
-                        { text: 'DataSourceType', dataIndex: 'DataSourceType' },
-                        { text: 'FileQueryColName', dataIndex: 'FileQueryColName' },
-                        { text: 'FileQueryOutputColName', dataIndex: 'FileQueryOutputColName' },
-                        { text: 'FileQueryTempPath', dataIndex: 'FileQueryTempPath' }
-                    ],
-                    listeners: {
-                        rowClick: function (grid, record){
-                            var reportId = record.get('ReportId');
-                                                        
-                            Ext.Ajax.request({
-                                url: 'https://localhost:7004/xml/DeleteNode/' + reportId,
-                                method: 'DELETE',
-                                success: function (response, opts) {
-                                    alert("Запись с reportId" + reportId + " удалена")
-                                },
-                                failure: function (response, opts) {
-                                    alert("Записи не существует или произошла ошибка, но скорее всего произошла ошибка")
+                        { text: 'ReportId', dataIndex: 'ReportId', editor: 'textfield', flex: 1},
+                        { text: 'Server', dataIndex: 'Server', editor: 'textfield', flex: 1 },
+                        { text: 'DataBase', dataIndex: 'DataBase', editor: 'textfield', flex: 1 },
+                        { text: 'UserName', dataIndex: 'UserName', editor: 'textfield',flex: 1 },
+                        { text: 'UserPassword', dataIndex: 'UserPassword', editor: 'textfield',flex: 1 },
+                        { text: 'DataSourceType', dataIndex: 'DataSourceType', editor: 'textfield', flex: 1 },
+                        { text: 'FileQueryColName', dataIndex: 'FileQueryColName', editor: 'textfield', flex: 1 },
+                        { text: 'FileQueryOutputColName', dataIndex: 'FileQueryOutputColName', editor: 'textfield', flex: 1 },
+                        { text: 'FileQueryTempPath', dataIndex: 'FileQueryTempPath', editor: 'textfield', flex: 1 },
+                        { text: 'DefaultComplex', dataIndex: 'DefaultComplex', editor: 'textfield', flex: 1 },
+                        { text: 'PivotCol', dataIndex: 'PivotCol', editor: 'textfield', flex: 1 },
+                        { text: 'PivotCols', dataIndex: 'PivotCols', editor: 'textfield', flex: 1 },
+                        { text: 'PivotData', dataIndex: 'PivotData', editor: 'textfield', flex: 1 },
+                        { text: 'PivotRows', dataIndex: 'PivotRows', editor: 'textfield', flex: 1 },
+                        { text: 'UsePivotData', dataIndex: 'UsePivotData', editor: 'textfield', flex: 1 },
+                        {
+                            xtype: 'actioncolumn',
+                            text: 'Удаление', 
+                            padding: 40, 
+                            items: [{
+                                iconCls: 'x-fa fa-trash-o', 
+                                tooltip: 'Методы',
+                                handler: function (grid, rowIndex, colIndex) {
+                                    var record = grid.getStore().getAt(rowIndex);
+                                    var reportId = record.get('ReportId');
+                                    
+                                    Ext.Ajax.request({
+                                        url: 'https://localhost:7004/xml/DeleteNode/' + reportId,
+                                        method: 'DELETE',
+                                        success: function (response, opts) {
+                                            alert("Запись с ReportId " + reportId + " удалена");
+                                            store.remove(record);
+                                        },
+                                        failure: function (response, opts) {
+                                            alert("Произошла ошибка при удалении записи");
+                                        }
+                                    });
                                 }
-                            });
+                            }]
                         }
-                    },
+                    ],
+                   selType: 'rowmodel',
+                   plugins: [
+                       Ext.create('Ext.grid.plugin.RowEditing', {
+                           clicksToEdit: 2,
+                           listeners: {
+                               edit: function (edit, context) {
+                                   var record = context.record;
+                                   var reportId = record.get("ReportId");
+                                   var changes = record.getChanges();
+                                   
+                                   function replaceEmptyWithNull(value) {
+                                       return value === '' ? null : value;
+                                   }
+                                   
+                                   for (var key in changes) {
+                                       if (changes.hasOwnProperty(key)) {
+                                           changes[key] = replaceEmptyWithNull(changes[key]);
+                                       }
+                                   }
+                                   console.log(changes)
+                                   
+                                   Ext.Ajax.request({
+                                       url: 'https://localhost:7004/xml/api/EditNode',
+                                       method: 'PUT', 
+                                       jsonData: changes,
+                                       /*success: function (response, opts) {
+                                           var responseData = Ext.decode(response.responseText);
+                                           if (responseData.success) {
+                                               Ext.Msg.alert('Успех', 'Изменения успешно сохранены');
+                                           } else {
+                                               Ext.Msg.alert('Ошибка', 'Произошла ошибка при сохранении изменений');
+                                           }
+                                       },
+                                       failure: function (response, opts) {
+                                           Ext.Msg.alert('Ошибка', 'Произошла ошибка при отправке данных на сервер');
+                                       }*/
+                                   });
+                                   
+                               }
+                           }
+                       })
+                   ],
                     flex: 1, 
                     height: 1500,
                     width: '800',
+                      
+                                            
                     renderTo: Ext.getBody()
                 });
                 
@@ -73,5 +137,9 @@
             
         });
         
+    </script>
+    <script>
+    var reportId = 555
+    console.log('https://localhost:7004/xml/EditNode/' + reportId.toString())
     </script>
 </div>

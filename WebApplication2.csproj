@@ -21,6 +21,7 @@
       <_ContentIncludedByDefault Remove="WebXMLApi\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="WebXMLApi\obj\WebXMLApi.csproj.nuget.dgspec.json" />
       <_ContentIncludedByDefault Remove="WebXMLApi\Properties\launchSettings.json" />
+      <_ContentIncludedByDefault Remove="Views\Xml\EditNode.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

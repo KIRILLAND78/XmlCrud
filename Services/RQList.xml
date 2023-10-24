@@ -1,16 +1,26 @@
 <?xml version="1.0" standalone="yes"?>
 <Reports>
   <Data>
-    <ReportId>2357</ReportId>
-    <FileQueryColName>окс_изображение_описание</FileQueryColName>
-    <FileQueryOutputColName>filePath</FileQueryOutputColName>
-    <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
+    <ReportId>3752</ReportId>
+    <Server>192.168.0.167:5432</Server>
+    <DataBase>dwh2_monit1</DataBase>
+    <UserName>fest</UserName>
+    <UserPassword>1</UserPassword>
+    <DataSourceType>2</DataSourceType>
   </Data>
   <Data>
     <ReportId>2357</ReportId>
     <FileQueryColName>окс_изображение_описание</FileQueryColName>
     <FileQueryOutputColName>filePath</FileQueryOutputColName>
     <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
+    <Server>kak dela</Server>
+  </Data>
+  <Data>
+    <ReportId>2357</ReportId>
+    <FileQueryColName>окс_изображение_описание</FileQueryColName>
+    <FileQueryOutputColName>filePath</FileQueryOutputColName>
+    <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
+    <Server>kak dela</Server>
   </Data>
   <Data>
     <ReportId>250</ReportId>
@@ -19,6 +29,7 @@
     <UserName>fest</UserName>
     <UserPassword>1</UserPassword>
     <DataSourceType>0</DataSourceType>
+    <FileQueryColName>dfkmgd</FileQueryColName>
   </Data>
   <Data>
     <ReportId>417</ReportId>
@@ -26,9 +37,35 @@
     <DataBase>dwh2_eis</DataBase>
     <UserName>kondratieva</UserName>
     <UserPassword>1</UserPassword>
-    <UsePivotData>true</UsePivotData>
+    <UsePivotData>false</UsePivotData>
     <PivotCol>product_group</PivotCol>
     <PivotRows>partner</PivotRows>
     <PivotData>year2020,year2021,year2022</PivotData>
+  </Data>
+  <Data>
+    <ReportId>0</ReportId>
+    <Server>ksdb3\dwh_de</Server>
+    <DataBase>dwh2_test_marina_19</DataBase>
+    <UserName>fest</UserName>
+    <UserPassword>
+    </UserPassword>
+    <DataSourceType>5</DataSourceType>
+    <DefaultComplex>64</DefaultComplex>
+  </Data>
+  <Data>
+    <ReportId>4497</ReportId>
+    <FileQueryColName>image_описание</FileQueryColName>
+    <FileQueryOutputColName>filePath</FileQueryOutputColName>
+    <FileQueryTempPath>Temp\LoadFiles</FileQueryTempPath>
+    <Server>ksdb3\dwh12</Server>
+    <DataBase>dwh2_gmp_project21</DataBase>
+  </Data>
+  <Data>
+    <ReportId>453</ReportId>
+    <UsePivotData>true</UsePivotData>
+    <PivotCols>product_group,product_subgroup</PivotCols>
+    <PivotRows>region</PivotRows>
+    <PivotData>year2021</PivotData>
+    <Server>sdfkdf</Server>
   </Data>
 </Reports>

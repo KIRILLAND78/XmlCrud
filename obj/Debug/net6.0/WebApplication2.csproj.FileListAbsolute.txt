@@ -93,3 +93,10 @@ C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\obj\Debug\
 C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\obj\Debug\net6.0\WebApplication2.pdb
 C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\obj\Debug\net6.0\WebApplication2.genruntimeconfig.cache
 C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\obj\Debug\net6.0\ref\WebApplication2.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Пользователь\Desktop\.net\CsharpProjects\XmlCrud\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

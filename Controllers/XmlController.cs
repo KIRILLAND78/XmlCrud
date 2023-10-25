@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebApplication2.Models;
@@ -8,15 +9,19 @@ using WebApplication2.Models.Constants;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace WebApplication2.Controllers;
+
+[Authorize]
+[ApiController]
 [Route("xml")]
 public class XmlController : Controller
 {
+    
     private IWebHostEnvironment Environment;
     public string Document;
+    
     public XmlController(IWebHostEnvironment environment)
     {
         Environment = environment;
-        System.Environment.GetEnvironmentVariable("kdjsfjngkljsdfngjklsd");
         Document = getXML();
     }
     
